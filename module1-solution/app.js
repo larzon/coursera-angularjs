@@ -4,9 +4,28 @@
 angular.module('LunchCheck', [])
 .controller('LunchCheckController', LunchCheckController);
 
-MsgController.$inject = ['$scope'];
+LunchCheckController.$inject = ['$scope'];
 function LunchCheckController($scope) {
-  // TODO
+  $scope.menu = "";
+  $scope.message = "";
+
+  $scope.checkIfTooMuch = function () {
+    if ($scope.menu === "") {
+      $scope.message = "Please enter data first";
+      return;
+    }
+
+    var numberOfItems = $scope.menu.split(",").length;
+    if (numberOfItems <= 3) {
+      $scope.message = "Enjoy!";
+    } else {
+      $scope.message = "Too much!";
+    }
+  };
+
+  $scope.showMessage = function () {
+    return $scope.message;
+  };
 }
 
 })();
